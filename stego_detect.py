@@ -2,7 +2,7 @@ import argparse
 
 def get_data(filepath):
     try:
-        file = open(filepath, 'r')
+        file = open(filepath, 'rb')
         d = file.read(100) 
         file.close()
         print(f"read ok: {filepath}")
