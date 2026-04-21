@@ -8,8 +8,10 @@ def get_data(filepath):
         h = d.hex()
         if h == "89504e470d0a1a0a":
             print("valid PNG")
+        elif h.startswith("ffd8ffe0") or h.startswith("ffd8ffee"):
+            print("valid JPEG")
         else:
-            print("NOT a png, might be spoofed")
+            print("Warning: Header mismatch or unknown file type!")
         return d
     except Exception as e:
         print("error:", e)
