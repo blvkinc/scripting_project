@@ -3,9 +3,9 @@ import argparse
 def get_data(filepath):
     try:
         file = open(filepath, 'rb')
-        d = file.read(100) 
+        d = file.read(8) 
         file.close()
-        print(f"read ok: {filepath}")
+        print(f"header hex: {d.hex()}")
         return d
     except Exception as e:
         print("error:", e)
