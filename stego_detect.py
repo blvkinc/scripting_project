@@ -5,7 +5,11 @@ def get_data(filepath):
         file = open(filepath, 'rb')
         d = file.read(8) 
         file.close()
-        print(f"header hex: {d.hex()}")
+        h = d.hex()
+        if h == "89504e470d0a1a0a":
+            print("valid PNG")
+        else:
+            print("NOT a png, might be spoofed")
         return d
     except Exception as e:
         print("error:", e)
