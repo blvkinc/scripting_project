@@ -16,6 +16,13 @@ def check_header(filepath):
     except Exception as e:
         print("error:", e)
 
+def analyze_structure(filepath):
+    # try reading chunks manually
+    with open(filepath, 'rb') as f:
+        f.seek(8)
+        chunk = f.read(4)
+        print("chunk size:", int.from_bytes(chunk, 'big'))
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument('-i', '--input', required=True)
