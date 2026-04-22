@@ -1,6 +1,6 @@
 import argparse
 
-def get_data(filepath):
+def check_header(filepath):
     try:
         file = open(filepath, 'rb')
         d = file.read(8) 
@@ -27,7 +27,7 @@ def main():
         print("verbose is on")
         print("file:", args.input)
 
-    res = get_data(args.input)
+    res = check_header(args.input)
 
 if __name__ == '__main__':
     main()
