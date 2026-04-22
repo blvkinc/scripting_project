@@ -1,3 +1,4 @@
+import cv2
 import argparse
 
 def check_header(filepath):
@@ -17,11 +18,8 @@ def check_header(filepath):
         print("error:", e)
 
 def analyze_structure(filepath):
-    # try reading chunks manually
-    with open(filepath, 'rb') as f:
-        f.seek(8)
-        chunk = f.read(4)
-        print("chunk size:", int.from_bytes(chunk, 'big'))
+    img = cv2.imread(filepath)
+    print("image shape:", img.shape)
 
 def main():
     p = argparse.ArgumentParser()
