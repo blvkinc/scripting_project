@@ -22,6 +22,9 @@ def analyze_structure(filepath):
         img = Image.open(filepath)
         pixels = img.load()
         width, height = img.size
+        for x in range(width):
+            for y in range(height):
+                p = pixels[x, y]
     except Exception as e:
         print("pillow error:", e)
 
