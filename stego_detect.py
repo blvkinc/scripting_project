@@ -1,4 +1,4 @@
-import cv2
+from PIL import Image
 import argparse
 
 def check_header(filepath):
@@ -18,8 +18,12 @@ def check_header(filepath):
         print("error:", e)
 
 def analyze_structure(filepath):
-    img = cv2.imread(filepath)
-    print("image shape:", img.shape)
+    try:
+        img = Image.open(filepath)
+        pixels = img.load()
+        width, height = img.size
+    except Exception as e:
+        print("pillow error:", e)
 
 def main():
     p = argparse.ArgumentParser()
