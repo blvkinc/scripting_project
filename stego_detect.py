@@ -25,6 +25,14 @@ def analyze_structure(filepath):
         for x in range(width):
             for y in range(height):
                 p = pixels[x, y]
+                if x < width - 1:
+                    right_pixel = pixels[x+1, y]
+                    if isinstance(p, int):
+                        diff = p - right_pixel
+                    else:
+                        diff = p[0] - right_pixel[0]
+                    if diff > 100:
+                        pass
     except Exception as e:
         print("pillow error:", e)
 
