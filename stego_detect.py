@@ -28,9 +28,9 @@ def analyze_structure(filepath):
                 if x < width - 1:
                     right_pixel = pixels[x+1, y]
                     if isinstance(p, int):
-                        diff = p - right_pixel
+                        diff = abs(p - right_pixel)
                     else:
-                        diff = p[0] - right_pixel[0]
+                        diff = abs(p[0] - right_pixel[0])
                     if diff > 100:
                         pass
     except Exception as e:
