@@ -32,7 +32,7 @@ def analyze_structure(filepath):
                     else:
                         diff = abs(p[0] - right_pixel[0])
                     if diff > 100:
-                        print('anomaly', x, y, diff)
+                        # print('anomaly', x, y, diff) # WAY TOO MUCH OUTPUT
     except Exception as e:
         print("pillow error:", e)
 
