@@ -34,6 +34,10 @@ def analyze_structure(filepath):
                         diff = abs(p[0] - right_pixel[0])
                     if diff > 100:
                         anomalies += 1
+        if anomalies > 500:
+            print(f"Structural anomalies detected! Found {anomalies} sharp gradients.")
+        else:
+            print(f"Structure looks okay.")
     except Exception as e:
         print("pillow error:", e)
 
