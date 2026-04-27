@@ -52,7 +52,8 @@ def main():
         print("verbose is on")
         print("file:", args.input)
 
-    res = check_header(args.input)
+    check_header(args.input)
+    analyze_structure(args.input)
 
 if __name__ == '__main__':
     main()
