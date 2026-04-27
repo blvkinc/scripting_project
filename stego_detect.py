@@ -22,6 +22,7 @@ def analyze_structure(filepath):
         img = Image.open(filepath)
         pixels = img.load()
         width, height = img.size
+        anomalies = 0
         for x in range(width):
             for y in range(height):
                 p = pixels[x, y]
@@ -32,7 +33,7 @@ def analyze_structure(filepath):
                     else:
                         diff = abs(p[0] - right_pixel[0])
                     if diff > 100:
-                        # print('anomaly', x, y, diff) # WAY TOO MUCH OUTPUT
+                        anomalies += 1
     except Exception as e:
         print("pillow error:", e)
 
