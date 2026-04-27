@@ -54,7 +54,11 @@ def extract_lsb(filepath):
         bytes_data = ["".join(bits[i:i+8]) for i in range(0, len(bits), 8)]
         ascii_text = ""
         for b in bytes_data:
-            ascii_text += chr(int(b, 2))
+            val = int(b, 2)
+            if 32 <= val <= 126:
+                ascii_text += chr(val)
+            else:
+                ascii_text += "." 
         print("lsb:", ascii_text)
     except Exception as e:
         print("lsb error:", e)
