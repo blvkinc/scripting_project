@@ -41,6 +41,24 @@ def analyze_structure(filepath):
     except Exception as e:
         print("pillow error:", e)
 
+def extract_lsb(filepath):
+    try:
+        img = Image.open(filepath)
+        pixels = img.load()
+        bits = []
+        for y in range(img.height):
+            for x in range(img.width):
+                p = pixels[x,y]
+                bits.append(str(p[0] & 1))
+        
+        bytes_data = ["".join(bits[i:i+8]) for i in range(0, len(bits), 8)]
+        ascii_text = ""
+        for b in bytes_data:
+            ascii_text += chr(int(b, 2))
+        print("lsb:", ascii_text)
+    except Exception as e:
+        print("lsb error:", e)
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument('-i', '--input', required=True)
