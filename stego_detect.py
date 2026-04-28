@@ -1,3 +1,4 @@
+import logging
 from PIL import Image
 import argparse
 
@@ -8,14 +9,14 @@ def check_header(filepath):
         file.close()
         h = d.hex()
         if h == "89504e470d0a1a0a":
-            log("valid PNG")
+            logging.info("valid PNG")
         elif h.startswith("ffd8ffe0") or h.startswith("ffd8ffee"):
-            log("valid JPEG")
+            logging.info("valid JPEG")
         else:
-            log("Warning: Header mismatch or unknown file type!")
+            logging.info("Warning: Header mismatch or unknown file type!")
         return d
     except Exception as e:
-        log("error:", e)
+        logging.info("error:", e)
 
 def analyze_structure(filepath):
     try:
@@ -35,11 +36,11 @@ def analyze_structure(filepath):
                     if diff > 100:
                         anomalies += 1
         if anomalies > 500:
-            log(f"Structural anomalies detected! Found {anomalies} sharp gradients.")
+            logging.info(f"Structural anomalies detected! Found {anomalies} sharp gradients.")
         else:
-            log(f"Structure looks okay.")
+            logging.info(f"Structure looks okay.")
     except Exception as e:
-        log("pillow error:", e)
+        logging.info("pillow error:", e)
 
 def extract_lsb(filepath):
     try:
@@ -66,14 +67,14 @@ def extract_lsb(filepath):
                 ascii_text += chr(val)
             else:
                 ascii_text += "." 
-        log("Raw LSB decoded sample:", ascii_text)
+        logging.info("Raw LSB decoded sample:", ascii_text)
         alphanumeric = sum(c.isalnum() for c in ascii_text)
         if alphanumeric > 20: 
-            log("WARNING: Potential steganographic payload detected in LSB!")
+            logging.info("WARNING: Potential steganographic payload detected in LSB!")
         else:
-            log("No obvious LSB payloads detected.")
+            logging.info("No obvious LSB payloads detected.")
     except Exception as e:
-        log("lsb error:", e)
+        logging.info("lsb error:", e)
 
 def main():
     p = argparse.ArgumentParser()
@@ -84,8 +85,8 @@ def main():
     args = p.parse_args()
 
     if args.verbose:
-        log("verbose is on")
-        log("file:", args.input)
+        logging.info("verbose is on")
+        logging.info("file:", args.input)
 
     check_header(args.input)
     analyze_structure(args.input)
