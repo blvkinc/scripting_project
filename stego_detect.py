@@ -8,14 +8,14 @@ def check_header(filepath):
         file.close()
         h = d.hex()
         if h == "89504e470d0a1a0a":
-            print("valid PNG")
+            log("valid PNG")
         elif h.startswith("ffd8ffe0") or h.startswith("ffd8ffee"):
-            print("valid JPEG")
+            log("valid JPEG")
         else:
-            print("Warning: Header mismatch or unknown file type!")
+            log("Warning: Header mismatch or unknown file type!")
         return d
     except Exception as e:
-        print("error:", e)
+        log("error:", e)
 
 def analyze_structure(filepath):
     try:
@@ -35,11 +35,11 @@ def analyze_structure(filepath):
                     if diff > 100:
                         anomalies += 1
         if anomalies > 500:
-            print(f"Structural anomalies detected! Found {anomalies} sharp gradients.")
+            log(f"Structural anomalies detected! Found {anomalies} sharp gradients.")
         else:
-            print(f"Structure looks okay.")
+            log(f"Structure looks okay.")
     except Exception as e:
-        print("pillow error:", e)
+        log("pillow error:", e)
 
 def extract_lsb(filepath):
     try:
@@ -66,14 +66,14 @@ def extract_lsb(filepath):
                 ascii_text += chr(val)
             else:
                 ascii_text += "." 
-        print("Raw LSB decoded sample:", ascii_text)
+        log("Raw LSB decoded sample:", ascii_text)
         alphanumeric = sum(c.isalnum() for c in ascii_text)
         if alphanumeric > 20: 
-            print("WARNING: Potential steganographic payload detected in LSB!")
+            log("WARNING: Potential steganographic payload detected in LSB!")
         else:
-            print("No obvious LSB payloads detected.")
+            log("No obvious LSB payloads detected.")
     except Exception as e:
-        print("lsb error:", e)
+        log("lsb error:", e)
 
 def main():
     p = argparse.ArgumentParser()
@@ -84,8 +84,8 @@ def main():
     args = p.parse_args()
 
     if args.verbose:
-        print("verbose is on")
-        print("file:", args.input)
+        log("verbose is on")
+        log("file:", args.input)
 
     check_header(args.input)
     analyze_structure(args.input)
