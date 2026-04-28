@@ -16,7 +16,7 @@ def check_header(filepath):
             logging.info("Warning: Header mismatch or unknown file type!")
         return d
     except Exception as e:
-        logging.info("error:", e)
+        logging.error(f"Failed to read headers: {e}")
 
 def analyze_structure(filepath):
     try:
@@ -40,7 +40,7 @@ def analyze_structure(filepath):
         else:
             logging.info(f"Structure looks okay.")
     except Exception as e:
-        logging.info("pillow error:", e)
+        logging.error(f"Pillow failed to analyze structure: {e}")
 
 def extract_lsb(filepath):
     try:
@@ -74,7 +74,7 @@ def extract_lsb(filepath):
         else:
             logging.info("No obvious LSB payloads detected.")
     except Exception as e:
-        logging.info("lsb error:", e)
+        logging.error(f"Failed LSB extraction: {e}")
 
 def setup_logger(verbose, out_file):
     lvl = logging.DEBUG if verbose else logging.INFO
