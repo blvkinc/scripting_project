@@ -91,10 +91,8 @@ def main():
     
     args = p.parse_args()
 
-    if args.verbose:
-        logging.info("verbose is on")
-        logging.info("file:", args.input)
-
+    setup_logger(args.verbose, args.output)
+    logging.info(f"--- Starting Analysis on {args.input} ---")
     check_header(args.input)
     analyze_structure(args.input)
     extract_lsb(args.input)
