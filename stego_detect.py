@@ -79,6 +79,7 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument('-i', '--input', required=True)
     p.add_argument('-v', '--verbose', action='store_true')
+    p.add_argument('-o', '--output', default=None)
     
     args = p.parse_args()
 
