@@ -76,6 +76,7 @@ def main():
 
     check_header(args.input)
     analyze_structure(args.input)
+    extract_lsb(args.input)
 
 if __name__ == '__main__':
     main()
