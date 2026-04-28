@@ -1,5 +1,6 @@
 import logging
 from PIL import Image
+import os
 import argparse
 
 def check_header(filepath):
