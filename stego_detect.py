@@ -94,6 +94,10 @@ def main():
 
     setup_logger(args.verbose, args.output)
     logging.info(f"--- Starting Analysis on {args.input} ---")
+    if not os.path.exists(args.input):
+        logging.error(f"File {args.input} does not exist.")
+        return
+
     check_header(args.input)
     analyze_structure(args.input)
     extract_lsb(args.input)
