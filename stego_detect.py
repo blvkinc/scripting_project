@@ -76,6 +76,13 @@ def extract_lsb(filepath):
     except Exception as e:
         logging.info("lsb error:", e)
 
+def setup_logger(verbose, out_file):
+    lvl = logging.DEBUG if verbose else logging.INFO
+    handlers = [logging.StreamHandler()]
+    if out_file:
+        handlers.append(logging.FileHandler(out_file))
+    logging.basicConfig(level=lvl, format='%(levelname)s: %(message)s', handlers=handlers)
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument('-i', '--input', required=True)
