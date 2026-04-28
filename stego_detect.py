@@ -49,7 +49,14 @@ def extract_lsb(filepath):
         for y in range(img.height):
             for x in range(img.width):
                 p = pixels[x,y]
-                bits.append(str(p[0] & 1))
+                if isinstance(p, tuple):
+                    bits.append(str(p[0] & 1))
+                else:
+                    bits.append(str(p & 1))
+                if len(bits) >= 800:
+                    break
+            if len(bits) >= 800:
+                break
         
         bytes_data = ["".join(bits[i:i+8]) for i in range(0, len(bits), 8)]
         ascii_text = ""
