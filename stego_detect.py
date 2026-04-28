@@ -66,7 +66,12 @@ def extract_lsb(filepath):
                 ascii_text += chr(val)
             else:
                 ascii_text += "." 
-        print("lsb:", ascii_text)
+        print("Raw LSB decoded sample:", ascii_text)
+        alphanumeric = sum(c.isalnum() for c in ascii_text)
+        if alphanumeric > 20: 
+            print("WARNING: Potential steganographic payload detected in LSB!")
+        else:
+            print("No obvious LSB payloads detected.")
     except Exception as e:
         print("lsb error:", e)
 
