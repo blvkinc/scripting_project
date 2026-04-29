@@ -3,7 +3,11 @@ from PIL import Image
 import os
 import argparse
 
+# --- Stage 1: Header Validation ---
 def check_header(filepath):
+    '''
+    Extracts hexadecimal values from headers to identify spoofed file types.
+    '''
     try:
         file = open(filepath, 'rb')
         d = file.read(8) 
@@ -19,7 +23,11 @@ def check_header(filepath):
     except Exception as e:
         logging.error(f"Failed to read headers: {e}")
 
+# --- Stage 2: Structural Analysis ---
 def analyze_structure(filepath):
+    '''
+    Calculates the gradient of every individual pixel to identify structural anomalies.
+    '''
     try:
         img = Image.open(filepath)
         pixels = img.load()
@@ -43,7 +51,12 @@ def analyze_structure(filepath):
     except Exception as e:
         logging.error(f"Pillow failed to analyze structure: {e}")
 
+# --- Stage 3: Payload Extraction ---
 def extract_lsb(filepath):
+    '''
+    Extracts the Least Significant Bit (LSB) from the red channel of the image.
+    This helps identify steganographic payloads hiding in the noise floor of the image.
+    '''
     try:
         img = Image.open(filepath)
         pixels = img.load()
